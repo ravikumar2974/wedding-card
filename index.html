@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="hi" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>वैवाहिक कार्यक्रम - Invitation</title>
+    <!-- SEO Best Practices -->
+    <meta name="description" content="रणधीर और खुशबू के विवाह समारोह का निमंत्रण।">
+    <meta name="robots" content="noindex, nofollow">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        maroon: {
+                            500: '#800000',
+                            600: '#660000',
+                            700: '#4d0000',
+                            800: '#330000',
+                        },
+                        gold: {
+                            400: '#D4AF37',
+                            500: '#C5A017',
+                        },
+                        cream: '#FFFDD0',
+                    },
+                    fontFamily: {
+                        hindi: ['"Noto Serif Devanagari"', 'serif'],
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #FFFDD0 0%, #F5F5DC 100%);
+            color: #330000;
+        }
+
+        .mandala-bg {
+            background-image: url('data:image/svg+xml;utf8,<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="%23D4AF37" stroke-width="0.5" fill="none" opacity="0.2"/><path d="M50 10 L50 90 M10 50 L90 50 M22 22 L78 78 M22 78 L78 22" stroke="%23D4AF37" stroke-width="0.5" opacity="0.2"/></svg>');
+            background-repeat: repeat;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(128, 0, 0, 0.1);
+        }
+
+        .gold-text {
+            background: linear-gradient(to right, #C5A017, #D4AF37, #F3E5AB, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #FFFDD0;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 4px;
+        }
+
+        @keyframes wiggle {
+
+            0%,
+            100% {
+                transform: rotate(-3deg);
+            }
+
+            50% {
+                transform: rotate(3deg);
+            }
+        }
+
+        .animate-wiggle {
+            animation: wiggle 1s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body
+    class="font-hindi antialiased min-h-screen relative overflow-x-hidden selection:bg-maroon-500 selection:text-cream">
+
+    <!-- Background Decoration -->
+    <div class="fixed inset-0 mandala-bg z-[-1]" aria-hidden="true"></div>
+    <div class="fixed top-0 left-0 w-32 h-32 bg-maroon-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float z-[-1]"
+        aria-hidden="true"></div>
+    <div class="fixed bottom-0 right-0 w-40 h-40 bg-gold-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float z-[-1]"
+        style="animation-delay: 2s;" aria-hidden="true"></div>
+
+    <!-- Music Player Button -->
+    <button id="musicToggle"
+        class="fixed top-4 right-4 z-50 bg-maroon-600 text-cream w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-maroon-700 transition-colors duration-300 ring-2 ring-gold-400 ring-offset-2 ring-offset-cream"
+        aria-label="Toggle background music">
+        <i class="fas fa-music animate-pulse"></i>
+    </button>
+    <audio id="bgMusic" loop preload="none">
+        <source src="india_happy-indian-wedding-490659.mp3" type="audio/mpeg"> <!-- Placeholder audio -->
+    </audio>
+
+    <div class="max-w-md mx-auto relative px-4 py-8">
+
+        <!-- Header / Hero Section -->
+        <header class="text-center min-h-[90vh] flex flex-col justify-center items-center relative reveal">
+            <!-- Decorative Top Pattern -->
+            <div class="mb-6 animate-pulse-slow">
+                <svg width="100" height="50" viewBox="0 0 100 50" class="mx-auto fill-maroon-600" aria-hidden="true">
+                    <path d="M50 0 C60 20 80 20 100 25 C80 30 60 30 50 50 C40 30 20 30 0 25 C20 20 40 20 50 0 Z" />
+                </svg>
+            </div>
+
+            <p class="text-xl md:text-2xl text-maroon-600 font-bold mb-4 tracking-wider">॥ श्री गणेशाय नमः ॥</p>
+
+            <div class="my-8 relative">
+                <div
+                    class="absolute inset-0 border-2 border-gold-400 rounded-full animate-spin-slow opacity-30 scale-110">
+                </div>
+                <img src="image.png" alt="Ganesha symbol"
+                    class="w-24 h-24 mx-auto drop-shadow-xl filter sepia hue-rotate-[320deg] saturate-[200%]">
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-bold mt-4 mb-6 gold-text">शुभ विवाह कार्यक्रम</h1>
+
+            <div class="w-16 h-1 bg-gradient-to-r from-transparent via-maroon-500 to-transparent mx-auto mb-8"></div>
+
+            <p class="text-lg text-maroon-800 italic font-hindi mb-12 px-6">
+                "मैं अपनी जिंदगी के इस नए और खूबसूरत सफर की शुरुआत करने जा रहा हूँ। इस खास मौके पर आपकी उपस्थिति मेरे
+                लिए बहुत मायने रखती है।"
+            </p>
+
+            <!-- Scroll Indicator -->
+            <button
+                class="absolute bottom-10 animate-bounce cursor-pointer flex flex-col items-center bg-transparent border-none"
+                onclick="document.getElementById('couple').scrollIntoView({behavior: 'smooth'})"
+                aria-label="Scroll down">
+                <span
+                    class="text-maroon-600 text-sm mb-2 font-sans font-semibold uppercase tracking-widest">Scroll</span>
+                <i class="fas fa-chevron-down text-maroon-600 text-xl"></i>
+            </button>
+        </header>
+
+        <!-- Bride & Groom Section -->
+        <section id="couple" class="py-16 reveal">
+            <h2 class="text-3xl text-center text-maroon-600 font-bold mb-10">वर - वधू</h2>
+
+            <div class="space-y-8">
+                <!-- Groom Card -->
+                <div
+                    class="glass-card p-6 rounded-3xl text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-maroon-500/20 group border-t-4 border-t-gold-400">
+                    <div
+                        class="w-20 h-20 mx-auto bg-maroon-500 rounded-full flex items-center justify-center mb-4 text-3xl text-cream shadow-inner ring-4 ring-gold-400 ring-opacity-50 group-hover:rotate-12 transition-transform duration-500">
+                        👨
+                    </div>
+                    <h3 class="text-2xl font-bold text-maroon-700 mb-2">चि० रणधीर कुमार</h3>
+                    <p class="text-sm text-maroon-800/80 mb-2 font-sans">सुपुत्र</p>
+                    <p class="text-base text-maroon-800 font-semibold">श्रीमती प्रमिला देवी एवं स्व. अजय सिंह</p>
+                </div>
+
+                <!-- Heart Separator -->
+                <div class="flex justify-center items-center py-4" aria-hidden="true">
+                    <div class="h-px bg-maroon-500 w-16 opacity-30"></div>
+                    <i class="fas fa-heart text-maroon-500 mx-4 animate-pulse-slow text-2xl drop-shadow-md"></i>
+                    <div class="h-px bg-maroon-500 w-16 opacity-30"></div>
+                </div>
+
+                <!-- Bride Card -->
+                <div
+                    class="glass-card p-6 rounded-3xl text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-maroon-500/20 group border-b-4 border-b-gold-400">
+                    <div
+                        class="w-20 h-20 mx-auto bg-maroon-500 rounded-full flex items-center justify-center mb-4 text-3xl text-cream shadow-inner ring-4 ring-gold-400 ring-opacity-50 group-hover:-rotate-12 transition-transform duration-500">
+                        👩
+                    </div>
+                    <h3 class="text-2xl font-bold text-maroon-700 mb-2">आयुषी कुमारी खुशबू</h3>
+                    <p class="text-sm text-maroon-800/80 mb-2 font-sans">सुपुत्री</p>
+                    <p class="text-base text-maroon-800 font-semibold">श्रीमती पुनीता देवी एवं श्री शंभू महतो</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Details Section -->
+        <section class="py-16 reveal">
+            <h2 class="text-3xl text-center text-maroon-600 font-bold mb-10 flex items-center justify-center gap-3">
+                <i class="fas fa-calendar-alt text-xl text-gold-500" aria-hidden="true"></i> कार्यक्रम
+            </h2>
+
+            <div
+                class="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-maroon-300 before:to-transparent">
+
+                <!-- Event 1 -->
+                <div
+                    class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                    <div
+                        class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-cream bg-maroon-500 text-gold-400 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-om text-sm" aria-hidden="true"></i>
+                    </div>
+                    <div
+                        class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-card p-4 rounded-2xl group-hover:-translate-y-1 transition-transform duration-300">
+                        <h3 class="text-xl font-bold text-maroon-700 mb-1">पूजा एवं मटकोर</h3>
+                        <div class="text-maroon-800 font-sans font-medium flex items-center gap-2">
+                            <i class="far fa-calendar text-gold-500" aria-hidden="true"></i> 27 April 2026
+                        </div>
+                        <p class="text-sm text-maroon-600/80 mt-1 font-sans">मंगलवार</p>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div
+                    class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                    <div
+                        class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-cream bg-maroon-500 text-gold-400 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-spa text-sm" aria-hidden="true"></i>
+                    </div>
+                    <div
+                        class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-card p-4 rounded-2xl group-hover:-translate-y-1 transition-transform duration-300">
+                        <h3 class="text-xl font-bold text-maroon-700 mb-1">हल्दी एवं मेहंदी</h3>
+                        <div class="text-maroon-800 font-sans font-medium flex items-center gap-2">
+                            <i class="far fa-calendar text-gold-500" aria-hidden="true"></i> 30 April 2026
+                        </div>
+                        <p class="text-sm text-maroon-600/80 mt-1 font-sans">गुरुवार</p>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div
+                    class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                    <div
+                        class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-cream bg-maroon-500 text-gold-400 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 group-hover:scale-110 transition-transform duration-300 animate-pulse">
+                        <i class="fas fa-ring text-sm" aria-hidden="true"></i>
+                    </div>
+                    <div
+                        class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-card p-4 rounded-2xl group-hover:-translate-y-1 transition-transform duration-300 border border-gold-400/50 bg-maroon-50/80">
+                        <h3 class="text-xl font-bold text-maroon-700 mb-1">शुभ विवाह</h3>
+                        <div class="text-maroon-800 font-sans font-medium flex items-center gap-2">
+                            <i class="far fa-calendar text-gold-500" aria-hidden="true"></i> 01 May 2026
+                        </div>
+                        <p class="text-sm text-maroon-600/80 mt-1 font-sans">शुक्रवार</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section class="py-12 reveal">
+            <div class="glass-card p-6 rounded-3xl border-l-4 border-r-4 border-gold-400 text-center">
+                <div
+                    class="inline-flex items-center justify-center w-12 h-12 bg-maroon-100 rounded-full mb-4 text-maroon-600">
+                    <i class="fas fa-map-marker-alt text-2xl" aria-hidden="true"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-maroon-700 mb-3">दर्शन अभिलाषी / स्थान</h2>
+                <p class="text-lg text-maroon-800 leading-relaxed font-sans">
+                    ग्राम - अदखनी<br>
+                    पोस्ट - सुतिहारा, जिला - सीतामढ़ी<br>
+                    पिन - 843331
+                </p>
+            </div>
+        </section>
+
+        <!-- Note Section -->
+        <section class="py-8 reveal">
+            <div
+                class="bg-gradient-to-br from-maroon-600 to-maroon-800 rounded-2xl p-6 text-cream shadow-xl relative overflow-hidden">
+                <!-- Decorative SVG -->
+                <svg class="absolute top-0 left-0 w-24 h-24 text-maroon-500 opacity-20 transform -translate-x-4 -translate-y-4"
+                    fill="currentColor" viewBox="0 0 100 100" aria-hidden="true">
+                    <path d="M50 0 L100 50 L50 100 L0 50 Z" />
+                </svg>
+
+                <h2 class="text-xl font-bold mb-3 flex items-center gap-2 relative z-10">
+                    <i class="fas fa-bell text-gold-400 animate-wiggle" aria-hidden="true"></i> नोट:
+                </h2>
+                <p class="text-base font-hindi font-medium leading-relaxed relative z-10">
+                    मेरी शादी में आपका अपने परिवार के साथ पधारना अनिवार्य है!<br>
+                    कृपया पधारकर मुझे और मेरी जीवनसंगिनी को अपना शुभ आशीर्वाद प्रदान करें। मुझे आपका बेसब्री से इंतज़ार
+                    रहेगा।
+                </p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-12 text-center reveal mt-8 relative">
+            <div class="w-24 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto mb-8"></div>
+
+            <h2 class="text-xl font-bold text-maroon-700 mb-4">दर्शनाभिलाषी</h2>
+            <p class="text-maroon-800 font-hindi mb-6">
+                आपका अपना<br>
+                <strong>रणधीर कुमार</strong><br>
+                (एवं समस्त परिवार)
+            </p>
+
+            <div class="text-maroon-500/60 font-sans text-xs flex flex-col items-center justify-center gap-2 mt-12">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-seedling" aria-hidden="true"></i> Created with love <i class="fas fa-seedling"
+                        aria-hidden="true"></i>
+                </div>
+                <div class="mt-4 pt-4 border-t border-maroon-500/20 w-full max-w-xs text-center">
+                    <p class="text-maroon-700 font-hindi text-[13px] font-semibold mb-3">क्या आप भी ऐसा डिजिटल निमंत्रण
+                        बनवाना चाहते हैं?</p>
+                    <a href="tel:+917061042974"
+                        class="inline-flex items-center gap-2 px-5 py-2.5 bg-maroon-600 text-cream rounded-full text-sm font-semibold hover:bg-maroon-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        <i class="fas fa-phone-alt animate-pulse"></i> हमें संपर्क करें
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100; // Trigger earlier
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Timeout to let styles load before first reveal
+        setTimeout(reveal, 100);
+
+        // Music Player Logic
+        const musicToggle = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+                musicToggle.classList.remove('bg-maroon-700', 'ring-offset-2');
+                musicToggle.classList.add('bg-maroon-600');
+            } else {
+                // Handle potential autoplay blocking
+                const playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+                        musicToggle.classList.add('bg-maroon-700', 'ring-offset-2');
+                        musicToggle.classList.remove('bg-maroon-600');
+                        isPlaying = true;
+                    })
+                        .catch(error => {
+                            console.log("Autoplay prevented:", error);
+                            alert("Please click the play button to start the music.");
+                        });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
