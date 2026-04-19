@@ -145,7 +145,7 @@
         aria-label="Toggle background music">
         <i class="fas fa-music animate-pulse"></i>
     </button>
-    <audio id="bgMusic" loop preload="none">
+    <audio id="bgMusic" loop muted>
         <source src="india_happy-indian-wedding-490659.mp3" type="audio/mpeg"> <!-- Placeholder audio -->
     </audio>
 
@@ -538,6 +538,23 @@
                 }
             }
         });
+        window.addEventListener('scroll', function startMusicOnScroll() {
+            if (!isPlaying) {
+                bgMusic.muted = false;
+
+                const playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        isPlaying = true;
+                        musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+                        musicToggle.classList.add('bg-maroon-700', 'ring-offset-2');
+                        musicToggle.classList.remove('bg-maroon-600');
+                    }).catch(() => {
+                        console.log("Still blocked");
+                    });
+                }
+            }
+        }, { once: true });
     </script>
 </body>
 
