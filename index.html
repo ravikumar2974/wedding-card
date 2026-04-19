@@ -126,11 +126,125 @@
         .animate-wiggle {
             animation: wiggle 1s ease-in-out infinite;
         }
+
+        /* Realistic Curtain Styles */
+        .curtain-cloth-left {
+            background:
+                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg=='),
+                repeating-linear-gradient(to right,
+                    #3a0000 0%,
+                    #5c0000 4%,
+                    #7a0000 8%,
+                    #5c0000 12%,
+                    #2b0000 16%,
+                    #3a0000 20%);
+            box-shadow: inset -20px 0 40px rgba(0, 0, 0, 0.8), 15px 0 25px rgba(0, 0, 0, 0.6);
+            border-right: 4px solid #D4AF37;
+            transform-origin: top left;
+            will-change: transform, border-radius;
+        }
+
+        .curtain-cloth-right {
+            background:
+                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg=='),
+                repeating-linear-gradient(to left,
+                    #3a0000 0%,
+                    #5c0000 4%,
+                    #7a0000 8%,
+                    #5c0000 12%,
+                    #2b0000 16%,
+                    #3a0000 20%);
+            box-shadow: inset 20px 0 40px rgba(0, 0, 0, 0.8), -15px 0 25px rgba(0, 0, 0, 0.6);
+            border-left: 4px solid #D4AF37;
+            transform-origin: top right;
+            will-change: transform, border-radius;
+        }
+
+        @keyframes openCurtainLeftAdvanced {
+            0% {
+                transform: translateX(0) scaleX(1) skewX(0);
+                border-bottom-right-radius: 0;
+            }
+
+            30% {
+                transform: translateX(-5%) scaleX(0.8) skewX(-4deg);
+                border-bottom-right-radius: 15% 5%;
+            }
+
+            100% {
+                transform: translateX(-100%) scaleX(0.15) skewX(-12deg);
+                border-bottom-right-radius: 100% 40%;
+            }
+        }
+
+        @keyframes openCurtainRightAdvanced {
+            0% {
+                transform: translateX(0) scaleX(1) skewX(0);
+                border-bottom-left-radius: 0;
+            }
+
+            30% {
+                transform: translateX(5%) scaleX(0.8) skewX(4deg);
+                border-bottom-left-radius: 15% 5%;
+            }
+
+            100% {
+                transform: translateX(100%) scaleX(0.15) skewX(12deg);
+                border-bottom-left-radius: 100% 40%;
+            }
+        }
+
+        @keyframes fadeScaleOut {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .curtain-animate-left {
+            animation: openCurtainLeftAdvanced 3s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+            animation-delay: 0.6s;
+        }
+
+        .curtain-animate-right {
+            animation: openCurtainRightAdvanced 3s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+            animation-delay: 0.6s;
+        }
     </style>
 </head>
 
 <body
     class="font-hindi antialiased min-h-screen relative overflow-x-hidden selection:bg-maroon-500 selection:text-cream">
+
+    <!-- Realistic Curtain Animation -->
+    <div id="curtain-container" class="fixed inset-0 z-[100] flex pointer-events-none overflow-hidden">
+        <!-- Left Curtain -->
+        <div id="curtain-left" class="w-1/2 h-full curtain-cloth-left relative z-10 pointer-events-auto">
+            <!-- Ripple/Highlight overlay -->
+            <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-50">
+            </div>
+        </div>
+        <!-- Right Curtain -->
+        <div id="curtain-right" class="w-1/2 h-full curtain-cloth-right relative z-10 pointer-events-auto">
+            <!-- Ripple/Highlight overlay -->
+            <div class="absolute inset-0 bg-gradient-to-tl from-transparent via-white/5 to-transparent opacity-50">
+            </div>
+        </div>
+
+        <!-- Center Seal -->
+        <div id="curtain-seal"
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-36 h-36 bg-gradient-to-br from-cream to-[#F3E5AB] rounded-full border-[5px] border-gold-400 shadow-[0_10px_40px_rgba(0,0,0,0.5)] flex items-center justify-center text-maroon-800 font-hindi text-4xl font-bold pointer-events-auto transition-transform duration-300 hover:scale-105 cursor-pointer">
+            <div
+                class="absolute inset-2 border-2 border-dashed border-gold-500 rounded-full animate-[spin_10s_linear_infinite]">
+            </div>
+            <span class="relative z-10 drop-shadow-sm">R <span class="text-2xl mx-1 text-gold-500">&</span> K</span>
+        </div>
+    </div>
 
     <!-- Background Decoration -->
     <div class="fixed inset-0 mandala-bg z-[-1]" aria-hidden="true"></div>
@@ -145,7 +259,7 @@
         aria-label="Toggle background music">
         <i class="fas fa-music animate-pulse"></i>
     </button>
-    <audio id="bgMusic" loop muted>
+    <audio id="bgMusic" loop preload="none">
         <source src="india_happy-indian-wedding-490659.mp3" type="audio/mpeg"> <!-- Placeholder audio -->
     </audio>
 
@@ -392,7 +506,8 @@
 
                 <!-- Shayari Text -->
                 <div class="relative z-10">
-                    <p class="text-base md:text-lg text-maroon-800 font-bold font-hindi leading-[2.2] drop-shadow-sm">
+                    <p
+                        class="text-[1.35rem] md:text-2xl text-maroon-800 font-bold font-hindi leading-[2.2] drop-shadow-sm">
                         <span class="block">मिलन है दो परिवारों का रस्म है खुशी मनाने का,</span>
                         <span class="block">हमें तो इंतजार है, शादी में आपके आने का!</span>
                     </p>
@@ -513,48 +628,75 @@
         // Music Player Logic
         const musicToggle = document.getElementById('musicToggle');
         const bgMusic = document.getElementById('bgMusic');
+        bgMusic.volume = 0.25; // Halka sound
         let isPlaying = false;
 
-        musicToggle.addEventListener('click', () => {
-            if (isPlaying) {
-                bgMusic.pause();
+        function updatePlayState(playing) {
+            isPlaying = playing;
+            if (playing) {
+                musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+                musicToggle.classList.add('bg-maroon-700', 'ring-offset-2');
+                musicToggle.classList.remove('bg-maroon-600');
+            } else {
                 musicToggle.innerHTML = '<i class="fas fa-music"></i>';
                 musicToggle.classList.remove('bg-maroon-700', 'ring-offset-2');
                 musicToggle.classList.add('bg-maroon-600');
+            }
+        }
+
+        function tryPlayMusic() {
+            const playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    updatePlayState(true);
+                }).catch(error => {
+                    console.log("Autoplay prevented:", error);
+                    updatePlayState(false);
+                });
+            }
+        }
+
+        musicToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (isPlaying) {
+                bgMusic.pause();
+                updatePlayState(false);
             } else {
-                // Handle potential autoplay blocking
-                const playPromise = bgMusic.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(_ => {
-                        musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
-                        musicToggle.classList.add('bg-maroon-700', 'ring-offset-2');
-                        musicToggle.classList.remove('bg-maroon-600');
-                        isPlaying = true;
-                    })
-                        .catch(error => {
-                            console.log("Autoplay prevented:", error);
-                            alert("Please click the play button to start the music.");
-                        });
-                }
+                tryPlayMusic();
             }
         });
-        window.addEventListener('scroll', function startMusicOnScroll() {
-            if (!isPlaying) {
-                bgMusic.muted = false;
 
-                const playPromise = bgMusic.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        isPlaying = true;
-                        musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
-                        musicToggle.classList.add('bg-maroon-700', 'ring-offset-2');
-                        musicToggle.classList.remove('bg-maroon-600');
-                    }).catch(() => {
-                        console.log("Still blocked");
-                    });
-                }
+        // Realistic Curtain Animation Logic
+        window.addEventListener('load', () => {
+            const leftCurtain = document.getElementById('curtain-left');
+            const rightCurtain = document.getElementById('curtain-right');
+            const seal = document.getElementById('curtain-seal');
+            const container = document.getElementById('curtain-container');
+
+            if (leftCurtain && rightCurtain && seal && container) {
+                document.body.classList.add('overflow-hidden');
+
+                const openCurtains = () => {
+                    if (container.dataset.opened) return;
+                    container.dataset.opened = "true";
+
+                    leftCurtain.classList.add('curtain-animate-left');
+                    rightCurtain.classList.add('curtain-animate-right');
+                    seal.style.animation = 'fadeScaleOut 0.8s ease-in forwards';
+
+                    // Attempt to play music when curtain opens
+                    tryPlayMusic();
+
+                    setTimeout(() => {
+                        container.style.display = 'none';
+                        document.body.classList.remove('overflow-hidden');
+                    }, 3800); // Wait for animation to finish
+                };
+
+                seal.addEventListener('click', openCurtains);
+                setTimeout(openCurtains, 800); // Auto open
             }
-        }, { once: true });
+        });
     </script>
 </body>
 
