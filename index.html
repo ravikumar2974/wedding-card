@@ -696,22 +696,6 @@
                 setTimeout(openCurtains, 800); // Auto open
             }
         });
-        let speed = 0.5;
-        let isScrolling = false;
-
-        function smoothScroll() {
-            if (!isScrolling) return;
-            window.scrollBy(0, speed);
-            requestAnimationFrame(smoothScroll);
-        }
-
-        // page load ke baad 6 second wait, phir start
-        window.onload = () => {
-            setTimeout(() => {
-                isScrolling = true;
-                smoothScroll();
-            }, 5000);
-        };
     </script>
 </body>
 
